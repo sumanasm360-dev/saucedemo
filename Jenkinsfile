@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     tools {
-        gradle 'Gradle'
-        jdk 'JDK'
-    }
+    gradle 'gradle'
+    jdk 'JDK8'
+}
 
     stages {
 
