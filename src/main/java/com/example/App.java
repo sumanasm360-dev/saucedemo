@@ -3,37 +3,36 @@ package com.example;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
-public class App {
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main(String[] args)
+    {
+        // Configure Chrome for Jenkins/Linux
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");          // modern headless mode
+        options.addArguments("--no-sandbox");            // required in Jenkins/Linux
+        options.addArguments("--disable-dev-shm-usage"); // avoids crashes
+        options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=1920,1080");
 
-    public static void main(String[] args) {
+        // Pass options here
+        WebDriver driver = new ChromeDriver(options);
 
-        // Create ChromeDriver object
-        WebDriver driver = new ChromeDriver();
-
-        // Open Saucedemo website
         driver.get("https://www.saucedemo.com/");
-
-        // Maximize browser window
         driver.manage().window().maximize();
 
-        // Enter Username
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
-
-        // Enter Password
         driver.findElement(By.id("password")).sendKeys("secret_sauce");
-
-        // Click Login button
         driver.findElement(By.id("login-button")).click();
 
-        // Wait for 5 seconds so we can see login success
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Login successful");
 
-        // Close browser
         driver.quit();
     }
 }
