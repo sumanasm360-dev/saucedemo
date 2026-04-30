@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     tools {
-    gradle 'gradle'
-    jdk 'JDK8'
-}
+        gradle 'gradle'
+        jdk 'JDK8'
+    }
 
     stages {
 
@@ -13,13 +13,13 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Suhas8349/MySel01.git'
             }
         }
-sh '''
-export GRADLE_OPTS="-Dorg.gradle.internal.http.connectionTimeout=60000 -Dorg.gradle.internal.http.socketTimeout=60000"
-./gradlew clean build
-...
+
         stage('Build') {
             steps {
-                sh './gradlew clean build'
+                sh '''
+                export GRADLE_OPTS="-Dorg.gradle.internal.http.connectionTimeout=60000 -Dorg.gradle.internal.http.socketTimeout=60000"
+                ./gradlew clean build
+                '''
             }
         }
 
